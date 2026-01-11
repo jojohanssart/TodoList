@@ -1,4 +1,5 @@
 let todoList = JSON.parse(localStorage.getItem('todos')) || [];
+let currentFilter = localStorage.getItem('currentFilter') || 'all';
 
 const inputElement = document.querySelector('.todo-input');
 const buttonElement = document.querySelector('.add-btn');
@@ -15,6 +16,9 @@ let completedTask = 0;
 const saveData = () => {
     localStorage.setItem('todos', JSON.stringify(todoList));
 }
+
+
+   
 
 // Add function
 const addTodo = () => {
@@ -34,20 +38,13 @@ const addTodo = () => {
     
 }
 
+let visibleList;
 
 // Render To Do HTML
 const renderTodoList = () => {
     let todoHTML = '';
-    let visibleList;
 
-    if (currentFilter === 'all') {
-        visibleList = todoList;
-    } else if (currentFilter === 'active') {
-        visibleList = todoList.filter(todo => !todo.isChecked);
-    } else if (currentFilter === 'completed') {
-        visibleList = todoList.filter(todo => todo.isChecked);
-    }
-
+    updateFilterButtons();
     visibleList.forEach((todo) => {
     const html = `
         <div class="todo-item">
@@ -157,10 +154,28 @@ const updateCounter = () => {
 }
 
 
-let currentFilter = 'all';
+
 const setFilter = (filterName) => {
     currentFilter = filterName;
+    localStorage.setItem('currentFilter', filterName);
     renderTodoList();
+    updateFilterButtons();
+}
+
+const updateFilterButtons = () => {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('.active-filter');
+    });
+    if (currentFilter === 'all') {
+            visibleList = todoList;
+            document.querySelector('.all-filter-btn').classList.add('active-filter');
+        } else if (currentFilter === 'active') {
+            visibleList = todoList.filter(todo => !todo.isChecked);
+            document.querySelector('.active-filter-btn').classList.add('active-filter');
+        } else if (currentFilter === 'completed') {
+            visibleList = todoList.filter(todo => todo.isChecked);
+            document.querySelector('.completed-filter-btn').classList.add('active-filter');
+        }
 }
 
 
