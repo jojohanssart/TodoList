@@ -60,12 +60,10 @@ const renderTodoList = () => {
         `;
         todoHTML += html;
     });
-    
-// todoList.forEach((todo, index) => {
-        
-    todoDisplay.innerHTML = todoHTML;
-    updateCounter();
 
+    document.querySelector('.all-filter-btn').innerText = `All (${todoList.length})`;
+    document.querySelector('.active-filter-btn').innerText = `Active (${todoList.filter(todo => !todo.isChecked).length})`;
+    document.querySelector('.completed-filter-btn').innerText = `Completed (${todoList.filter(todo => todo.isChecked).length})`;
 
     if (todoList.length === 0) {
         taskCounterElement.innerHTML =
@@ -77,6 +75,9 @@ const renderTodoList = () => {
         taskCounterElement.innerHTML =
         `Ready to check off that first box?`
     } 
+
+    todoDisplay.innerHTML = todoHTML;
+    updateCounter();
 }
 
 // Delete function
@@ -135,5 +136,6 @@ const setFilter = (filterName) => {
     currentFilter = filterName;
     renderTodoList();
 }
+
 
 renderTodoList();
