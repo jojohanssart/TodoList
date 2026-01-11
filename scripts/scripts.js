@@ -36,9 +36,19 @@ const addTodo = () => {
 // Render To Do HTML
 const renderTodoList = () => {
     let todoHTML = '';
+    let visibleList;
 
-    todoList.forEach((todo, index) => {
-        const html = `
+    
+    if (currentFilter === 'all') {
+        visibleList = todoList;
+    } else if (currentFilter === 'active') {
+        visibleList = todoList.filter(todo => !todo.isChecked);
+    } else if (currentFilter === 'completed') {
+        visibleList = todoList.filter(todo => todo.isChecked);
+    }
+
+    visibleList.forEach((todo, index) => {
+    const html = `
         <div class="todo-item">
         <input type="checkbox"
         onclick="toggleCheckbox(${index})"
@@ -50,8 +60,12 @@ const renderTodoList = () => {
         `;
         todoHTML += html;
     });
+    
+// todoList.forEach((todo, index) => {
+        
     todoDisplay.innerHTML = todoHTML;
     updateCounter();
+
 
     if (todoList.length === 0) {
         taskCounterElement.innerHTML =
@@ -96,7 +110,6 @@ inputElement.addEventListener('keydown', (event) => {
 
 
 
-
 // Shortcut to write todo
 bodyElement.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
@@ -116,5 +129,11 @@ const updateCounter = () => {
     console.log(count);
 }
 
+
+let currentFilter = 'all';
+const setFilter = (filterName) => {
+    currentFilter = filterName;
+    renderTodoList();
+}
 
 renderTodoList();
