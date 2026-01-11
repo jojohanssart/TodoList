@@ -1,10 +1,11 @@
-const todoList = JSON.parse(localStorage.getItem('todos')) || [];
+let todoList = JSON.parse(localStorage.getItem('todos')) || [];
 
 const inputElement = document.querySelector('.todo-input');
 const buttonElement = document.querySelector('.add-btn');
 const bodyElement = document.querySelector('body');
 const checboxElement = document.querySelector('.checkbox');
 const taskCounterElement = document.querySelector('.counter');
+const clearAllButtonElement = document.querySelector('.clear-all-div');
 
 const todoDisplay = document.querySelector('.todo-list');
 
@@ -80,7 +81,14 @@ const renderTodoList = () => {
     document.querySelector('.active-filter-btn').innerText = `Active (${todoList.filter(todo => !todo.isChecked).length})`;
     document.querySelector('.completed-filter-btn').innerText = `Completed (${todoList.filter(todo => todo.isChecked).length})`;
     
-
+    if (todoList.length === 0) {
+    let html = '';
+    clearAllButtonElement.innerHTML = html;
+    } else {html = `
+    <button class="clear-btn" onclick="clearTodo()">Clear All</button> `;
+    clearAllButtonElement.innerHTML = html;
+    }
+    
 }
 
 // Delete function
@@ -93,8 +101,22 @@ const deleteTodo = (id) => {
     }
 }
 
+
+// Clear all function
+const clearTodo = () => { 
+    if (!confirm(`Are you sure you want to clear the whole list? You can't undo this!`)) {
+        return
+    }
+    todoList = [];
+    renderTodoList();
+    saveData();
+    alert('Task cleared');
+}
+
+
+
 // Checkbox function
-function toggleCheckbox (id) {
+const toggleCheckbox = (id) => {
     const index = todoList.findIndex((todo) => todo.id === id);
     
     if (index !== -1) {
