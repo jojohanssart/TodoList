@@ -10,15 +10,10 @@ const clearAllButtonElement = document.querySelector('.clear-all-div');
 
 const todoDisplay = document.querySelector('.todo-list');
 
-let completedTask = 0;
-
 
 const saveData = () => {
     localStorage.setItem('todos', JSON.stringify(todoList));
 }
-
-
-
 
 // Add function
 const addTodo = () => {
@@ -38,9 +33,9 @@ const addTodo = () => {
 
 }
 
-let visibleList;
-
 // Render To Do HTML
+let completedTask = 0;
+let visibleList;
 const renderTodoList = () => {
     let todoHTML = '';
 
@@ -58,21 +53,9 @@ const renderTodoList = () => {
         `;
         todoHTML += html;
     });
-
-
     todoDisplay.innerHTML = todoHTML;
     updateCounter();
-
-    if (todoList.length === 0) {
-        taskCounterElement.innerHTML =
-            `Nothing here yet. Let's make today's count!`;
-    } else if (completedTask > 0) {
-        taskCounterElement.innerHTML =
-            `${completedTask} tasks done. Nice work!`
-    } else if (todoList.length > 0 && completedTask === 0) {
-        taskCounterElement.innerHTML =
-            `Ready to check off that first box?`
-    }
+    updateMessage();
 
     document.querySelector('.all-filter-btn').innerText = `All (${todoList.length})`;
     document.querySelector('.active-filter-btn').innerText = `To Do (${todoList.filter(todo => !todo.isChecked).length})`;
@@ -148,6 +131,7 @@ bodyElement.addEventListener('keydown', (event) => {
 })
 
 
+// Filter button counter
 const updateCounter = () => {
     const completedList = todoList.filter((todo) => todo.isChecked);
     const count = completedList.length;
@@ -155,7 +139,7 @@ const updateCounter = () => {
 }
 
 
-
+// Filter function
 const setFilter = (filterName) => {
     currentFilter = filterName;
     localStorage.setItem('currentFilter', filterName);
@@ -163,6 +147,7 @@ const setFilter = (filterName) => {
     updateFilterButtons();
 }
 
+// Add active class to filter button
 const updateFilterButtons = () => {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.remove('.active-filter');
@@ -179,5 +164,47 @@ const updateFilterButtons = () => {
     }
 }
 
+// Active tab message function
+const updateMessage = () => {
+    const totalTodo = todoList.length;
+    const completedTodo = todoList.filter(todo => todo.isChecked).length;
+    const activeTodo = totalTodo - completedTodo;
+
+    let message = ``;
+    if (currentFilter === 'all') {
+        if (totalTodo === 0) {
+            message = `Nothing here yet. Let's make today's count!`
+        } else if (completedTodo === 0) {
+            message = `Ready to check off that first box?`
+        } else if (completedTodo === totalTodo) {
+            message = `All caught up! Time to relax.`
+        } else if (activeTodo >= 0) {
+            message = `${completedTodo} tasks done. Keep going!`
+        }
+
+    } else if (currentFilter === 'active') {
+        if (totalTodo === 0) {
+            message = `Nothing here yet. Let's make today's count!`
+        } else if (completedTodo === 0) {
+            message = `Ready to check off that first box?`
+        } else if (completedTodo === totalTodo) {
+            message = `All caught up! Time to relax.`
+        } else if (activeTodo >= 0) {
+            message = `You have ${activeTodo} tasks left to do.`
+        }
+    } else if (currentFilter === 'completed') {
+        if (totalTodo === 0) {
+            message = `Nothing here yet. Let's make today's count!`
+        } else if (completedTodo === 0) {
+            message = `No completed tasks yet. Let's start small!`
+        } else if (completedTodo === totalTodo) {
+            message = `Look at all these ${completedTodo} wins. Nice work!`
+        } else if (activeTodo >= 0) {
+            message = `${completedTodo} tasks done. ${activeTodo} tasks left. Keep it up!`
+        }
+    }
+
+    taskCounterElement.innerHTML = message;
+}
 
 renderTodoList();
