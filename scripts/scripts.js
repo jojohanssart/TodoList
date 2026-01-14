@@ -9,7 +9,7 @@ const taskCounterElement = document.querySelector('.counter');
 const clearAllButtonElement = document.querySelector('.clear-all-div');
 const bottomDividerElement = document.querySelector('.bottom-divider');
 
-const todoDisplay = document.querySelector('.todo-list');
+const todoDisplay = document.querySelector('.todo-list-div');
 
 
 const saveData = () => {
@@ -28,10 +28,8 @@ const addTodo = () => {
     });
     renderTodoList();
 
-    console.log(todoList);
     inputElement.value = '';
     saveData();
-
 }
 
 // Render To Do HTML
@@ -43,7 +41,7 @@ const renderTodoList = () => {
     updateFilterButtons();
     visibleList.forEach((todo) => {
         const html = `
-        <div class="todo-item">
+        <div class="todo-item ${todo.isChecked ? 'done' : ''}">
         <div class="todo-item-left-section">
         <input type="checkbox"
         onclick="toggleCheckbox(${todo.id})"

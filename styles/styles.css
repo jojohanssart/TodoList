@@ -9,7 +9,7 @@ Palette
     --white: #FAFAFA;
 
     --red: #DD2900;
-    --light-red: #FDB2A1;
+    --light-red: #FFE7E7;
 
     --glass: rgba(255, 255, 255, 0.85);
     --glass-border: rgba(255, 255, 255, 0.7);
@@ -32,8 +32,10 @@ h1 {
 }
 
 body {
-    margin-bottom: 4rem;
-    background-color: var(--white);
+    height: 100vh;
+    background-image: linear-gradient(#F4F4F4, #FFF);
+
+    margin-bottom: 5rem;
 }
 
 
@@ -68,6 +70,7 @@ body {
     gap: 1rem;
 
     margin: 0rem 1.5rem;
+    margin-bottom: 4rem;
 }
 
 .top-component-section {
@@ -99,12 +102,34 @@ body {
     padding: 0.75rem 0.625rem;
 }
 
+.todo-input:hover {
+    box-shadow: 0px 6px 12px rgba(78, 78, 78, 0.2);
+}
+
+.todo-input:focus,
+.todo-input:focus-visible {
+    box-shadow: 0px 6px 12px rgba(78, 78, 78, 0.2);
+    border: 1px solid var(--black);
+}
+
 .add-btn {
     background-color: var(--black);
     color: var(--white);
     min-width: 56px;
 
     border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease-out;
+}
+
+.add-btn:hover {
+    transform: scale(1.06);
+    opacity: 0.9;
+}
+
+.add-btn:active {
+    transform: scale(1);
+    opacity: 1;
 }
 
 
@@ -124,6 +149,7 @@ body {
     padding: 0.5rem 0.75rem;
 
     background-color: transparent;
+    cursor: pointer;
 }
 
 .filter-btn:hover {
@@ -149,7 +175,9 @@ hr.grey-line-divider.hide {
     display: none;
 }
 
-.todo-list {
+
+/* Todo section */
+.todo-list-div {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -170,11 +198,71 @@ hr.grey-line-divider.hide {
     border: 1px solid var(--light-grey);
     border-radius: 8px;
     background-color: var(--white);
+    transition: all 0.15s ease-out;
+}
+
+.todo-item:hover {
+    box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.15);
+    box-shadow: 0px 1px 4px rgba(12, 12, 13, 0.2);
+}
+
+.todo-item.done {
+    background-color: var(--white-background);
+    border-color: var(--light-grey);
 }
 
 .todo-item-left-section {
     display: flex;
+    align-items: center;
     gap: 1rem;
+}
+
+
+/*  Custom checkbox by Gemini AI, i modified its size and color only   */
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+
+    width: 20px;
+    height: 20px;
+
+    border: 2px solid var(--grey);
+    border-radius: 4px;
+    background-color: transparent;
+
+    display: grid;
+    place-content: center;
+    transition: all 0.2s ease-in-out;
+
+    cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+    background-color: var(--white-background);
+    border-color: var(--black);
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 16px;
+    height: 12px;
+
+    box-shadow: inset 1em 1em white;
+    transform: scale(0);
+
+    transform-origin: center;
+    transition: 120ms transform ease-in-out;
+
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--black);
+    border: none;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(0.70);
 }
 
 .delete-btn {
@@ -186,7 +274,9 @@ hr.grey-line-divider.hide {
     border-radius: 8px;
     background-color: transparent;
     color: var(--light-grey);
+
     transition: all 0.35s ease-out;
+    cursor: pointer;
 }
 
 .todo-text.done {
@@ -201,9 +291,13 @@ hr.grey-line-divider.hide {
 
 .todo-item:hover .delete-btn:hover {
     color: var(--red);
-    background-color: ;
+    /*
+    background-color: var(--light-red);
+    */
 }
 
+
+/*  Clear all button    */
 .clear-btn {
     min-width: 72px;
     max-width: 120px;
@@ -214,4 +308,10 @@ hr.grey-line-divider.hide {
     background-color: transparent;
 
     color: var(--red);
+    transition: all 0.35s ease-out;
+}
+
+.clear-btn:hover {
+    color: var(--red);
+    background-color: var(--light-red);
 }
