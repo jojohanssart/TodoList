@@ -150,7 +150,7 @@ const setFilter = (filterName) => {
 // Add active class to filter button
 const updateFilterButtons = () => {
     document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('.active-filter');
+        btn.classList.remove('active-filter');
     });
     if (currentFilter === 'all') {
         visibleList = todoList;
@@ -213,7 +213,7 @@ const updateMessage = () => {
 // For now I used AI for this real time date and clock
 const updateClock = () => {
     const now = new Date();
-    const dateOptions = { weekday: 'long', month: 'short', day: 'numeric' };
+    const dateOptions = { weekday: 'short', month: 'short', day: 'numeric' };
     const dateString = now.toLocaleDateString('en-US', dateOptions);
 
     const timeString = now.toLocaleTimeString('en-US', { timeStyle: 'short' });

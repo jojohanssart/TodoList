@@ -1,0 +1,48 @@
+/*
+Palette
+*/
+:root {
+    --black: #1A1A1A;
+    --grey: #979797;
+    --light-grey: #BCBCBC;
+    --white-background: #EDEDED;
+    --white: #FAFAFA;
+
+    --glass: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.7);
+}
+
+
+
+body,
+h1 {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.daily-logo {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: bold;
+}
+
+
+.todo-item {
+    height: 32px;
+
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+}
+
+.todo-text.done {
+    text-decoration: line-through;
+    color: grey;
+}

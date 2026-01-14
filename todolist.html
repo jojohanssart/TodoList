@@ -4,31 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily</title>
+    <title>Daily. Todo List</title>
 
-    <style>
-        .todo-item {
-            height: 32px;
-
-            align-items: center;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .todo-text.done {
-            text-decoration: line-through;
-            color: grey;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
 
 <body>
-
-    <h1>Daily.</h1>
-    <div class="header-info">
-        <span id="dateDisplay"></span>
-        <span class="separator">|</span>
-        <span id="clockDisplay"></span>
+    <div class="header-container">
+        <h1 class="daily-logo">Daily.</h1>
+        <div class="header-info">
+            <span id="dateDisplay"></span>
+            <span class="separator">|</span>
+            <span id="clockDisplay"></span>
+        </div>
     </div>
 
     <div class="input-group">
