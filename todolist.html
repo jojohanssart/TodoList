@@ -23,17 +23,21 @@
         </div>
     </div>
 
-    <div class="input-group">
-        <input type="text" class="todo-input" placeholder="What's the next big win?">
-        <button class="add-btn">Add</button>
-    </div>
+    <div class="content-container">
+        <div class="top-component-section">
+            <div class="input-group">
+                <input type="text" class="todo-input" placeholder="What's the next big win?">
+                <button class="add-btn">Add</button>
+            </div>
 
-    <div class="filter-buttons">
-        <button class="all-filter-btn filter-btn" onclick="setFilter('all')"></button>
-        <button class="active-filter-btn filter-btn" onclick="setFilter('active')"></button>
-        <button class="completed-filter-btn filter-btn" onclick="setFilter('completed')"></button>
+            <div class="filter-buttons">
+                <button class="all-filter-btn filter-btn" onclick="setFilter('all')"></button>
+                <button class="active-filter-btn filter-btn" onclick="setFilter('active')"></button>
+                <button class="completed-filter-btn filter-btn" onclick="setFilter('completed')"></button>
+            </div>
+        </div>
+        <hr class="solid">
     </div>
-
     <p class="counter"></p>
     <div class="todo-list"></div>
     <div class="clear-all-div"></div>
