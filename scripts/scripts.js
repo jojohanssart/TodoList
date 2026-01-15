@@ -8,6 +8,7 @@ const checboxElement = document.querySelector('.checkbox');
 const taskCounterElement = document.querySelector('.counter');
 const clearAllButtonElement = document.querySelector('.clear-all-div');
 const bottomDividerElement = document.querySelector('.bottom-divider');
+const headerElement = document.querySelector('.header-container');
 
 const todoDisplay = document.querySelector('.todo-list-div');
 
@@ -236,5 +237,22 @@ const hideDivider = () => {
         bottomDividerElement.classList.add('hide')
     } else bottomDividerElement.classList.remove('hide');
 }
+
+let inactivityTimer;
+
+const resetTimer = () => {
+    headerElement.classList.remove('inactive');
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(hideElement, 7500);
+}
+
+const hideElement = () => {
+    headerElement.classList.add('inactive')
+}
+
+window.addEventListener('mousemove', resetTimer);
+window.addEventListener('keydown', resetTimer);
+window.addEventListener('scroll', resetTimer);
+window.addEventListener('touchstart', resetTimer);
 
 renderTodoList();
